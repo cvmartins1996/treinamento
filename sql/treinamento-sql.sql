@@ -27,7 +27,7 @@ CREATE TABLE sales (
       REFERENCES employees(subsidiary_id, employee_id)
 );
 
-.tables
+
 COMMIT;
 
 BEGIN TRANSACTION;
@@ -109,31 +109,40 @@ SELECT sale_id, employee_id FROM sales;
 SELECT * FROM sales;
 
 /* Exibir todas as vendas da Marina */
-SELECT sale_id FROM sales WHERE employee_id = 7;
+SELECT 
+    s.sale_id, s.employee_id, e.first_name, e.last_name, s.sale_date 
+    FROM 
+        sales s, employees e
+    INNER JOIN
+        employees ON e.employee_id = s.employee_id
+    WHERE 
+        s.employee_id = 7
+    GROUP BY 
+        s.sale_id;
 
 /* Exibir todas as vendas dos útimos 3 meses */
 SELECT * FROM sales WHERE  sale_date >= DATE('now','start of month','-3 month') ORDER BY DATE(sale_date) DESC;
 
 
-.tables
+
 /* Exibir os 3 vendedores com o maior número de vendas */
-SELECT sales.employee_id, sales.sale_id, (SUM(quantity)) FROM sales
+SELECT s.employee_id, s.sale_date, e.first_name, e.last_name, (SUM(quantity)) FROM sales s, employees e
     INNER JOIN
-        employees ON employees.employee_id = sales.employee_id
+        employees ON e.employee_id = s.employee_id
     GROUP BY
-        sales.employee_id
+        s.employee_id
     ORDER BY quantity DESC LIMIT 3;
 
 
 /* Exibir os 3 vendedores com o maior número de vendas dos ultimos 3 meses*/
-.tables
-SELECT sales.employee_id, sales.sale_id, sales.sale_date, (SUM(quantity))
-    FROM sales
+
+SELECT s.employee_id, s.sale_date, e.first_name, e.last_name, (SUM(quantity))
+    FROM sales s,  employees e
     INNER JOIN
-        employees ON employees.employee_id = sales.employee_id
+        employees ON e.employee_id = s.employee_id
     WHERE
-        sales.sale_date >= DATE('now','start of month','-3 month')
+        s.sale_date >= DATE('now','start of month','-3 month')
     GROUP BY
-        sales.employee_id
+        s.employee_id
     ORDER BY 
         DATE(sale_date) DESC LIMIT 3;
