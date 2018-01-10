@@ -11,14 +11,8 @@ class Aluno{
 	public void nomeDoAluno(String nomeDoAluno) {
 		this.nome = nomeDoAluno;
 	}
-	public void displayNome() {
-		System.out.println("Nome: "+nome);
-	}
 	public void disciplinaCursada(String disciplinaCursada) {
 		this.disciplina = disciplinaCursada;
-	}
-	public void displayDisciplina() {
-		System.out.println("Disciplina: "+ disciplina);
 	}
 	/*public void mediaDasNotas(float f) {
 		float somatoriaDeNotas = 0;

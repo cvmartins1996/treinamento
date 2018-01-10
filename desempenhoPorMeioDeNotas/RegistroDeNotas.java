@@ -5,8 +5,6 @@ public class RegistroDeNotas {
 		Aluno aluno = new Aluno();
 		aluno.nomeDoAluno("Caio");
 		aluno.disciplinaCursada("Matematica");
-		aluno.displayNome();
-		aluno.displayDisciplina();
 	}
 }
 
