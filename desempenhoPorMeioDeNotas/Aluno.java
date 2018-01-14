@@ -4,22 +4,54 @@ import java.util.List;
 
 
 class Aluno{
-	String nome;
-	String disciplina;
-	private List <Nota> nota = new ArrayList<>();
 	
-	public void nomeDoAluno(String nomeDoAluno) {
-		this.nome = nomeDoAluno;
+	private String nome;
+	private List <Nota> notas = new ArrayList<>();
+	private List <Materia> materias = new ArrayList<>();
+	
+	public void nomeDoAluno(String nome) {
+		this.nome = nome;
 	}
-	public void disciplinaCursada(String disciplinaCursada) {
-		this.disciplina = disciplinaCursada;
-	}
-	/*public void mediaDasNotas(float f) {
+	
+	public float somatoriaDeTodasNotas() {
 		float somatoriaDeNotas = 0;
-		for (Nota notaDoAluno : nota) {
-			somatoriaDeNotas = somatoriaDeNotas + nota; 
+		for (Nota nota : notas) {
+			somatoriaDeNotas = somatoriaDeNotas + nota.getValor(); 
+		}			
+		return somatoriaDeNotas;
+	}
+	
+	public String listarTodasAsMaterias() {
+		StringBuilder nomeDaMateriaBuilder = new StringBuilder();
+		for (Materia materia : materias) {
+			nomeDaMateriaBuilder.append(materia.getMateria().concat(" "));
 		}
-		System.out.println(nota/somatoriaDeNotas);
-	}*/
+		String nomeDaMateria = nomeDaMateriaBuilder.toString();
+		
+		return nomeDaMateria;
+	}
+	
+	public void adicionarNotasEMaterias(Nota nota, Materia materia) {
+		notas.add(nota);
+		materias.add(materia);
+	}
+	
+	public float getMediaTodas() {
+		return (somatoriaDeTodasNotas()/notas.size());
+	}
+	
+
+	public String getNome() {
+		return nome;
+	}
+
+	public float MediaPorMateria(int codMateria) {
+		for (int i = 0; i < this.materias.size(); i++) {
+			if (this.materias.get(i).getCodigo() == codMateria) {
+				System.out.println(codMateria+ " " + " " +this.materias.get(i).getCodigo() );
+			}
+		}
+		return 8.2f;
+	}
 	
 }
